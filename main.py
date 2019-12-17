@@ -39,10 +39,10 @@ def return_file_paths_that_have_changed_files(branch):
 def build_docker(dockerfile_path):
     dockerfile = str(dockerfile_path) + "/Dockerfile"
     print(dockerfile)
-    subprocess.call("docker login -u " + str(docker_username) + " -p " + str(docker_password))
-    subprocess.call("docker build -t rws2154/learning:python " + str(dockerfile_path))
-    subprocess.call("docker push rws2154/learning:python")
-    subprocess.call("docker logout")
+    subprocess.call("docker login -u " + str(docker_username) + " -p " + str(docker_password), shell=True)
+    subprocess.call("docker build -t rws2154/learning:python " + str(dockerfile_path), shell=True)
+    subprocess.call("docker push rws2154/learning:python", shell=True)
+    subprocess.call("docker logout", shell=True)
 
 github = Github(github_token)
 repo = github.get_repo("bsullivan-sd/DockerLearning")
