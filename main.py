@@ -3,7 +3,7 @@ import os
 from github import Github
 import json
 
-github_token = os.environ['GITHUB_TOKEN']
+github_token = os.environ['INPUT_GITHUB_TOKEN']
 
 def return_dockerfile_locations(repos):
     results=[]
