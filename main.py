@@ -2,8 +2,12 @@ import sys
 import os
 from github import Github
 import json
+import subprocess
 
 github_token = os.environ['INPUT_GITHUB_TOKEN']
+dockerhub_repo = os.environ['INPUT_DOCKERHUB_REPO']
+docker_username = os.environ['INPUT_DOCKER_USERNAME']
+docker_password = os.environ['INPUT_DOCKER_PASSWORD']
 
 def return_dockerfile_locations(repos):
     results=[]
@@ -35,7 +39,10 @@ def return_file_paths_that_have_changed_files(branch):
 def build_docker(dockerfile_path):
     dockerfile = str(dockerfile_path) + "/Dockerfile"
     print(dockerfile)
-
+    subprocess.call("docker login -u " + str(docker_username) + " -p " + str(docker_password))
+    subprocess.call("docker build -t rws2154/learning:python " + str(dockerfile_path))
+    subprocess.call("docker push rws2154/learning:python")
+    subprocess.call("docker logout")
 
 github = Github(github_token)
 repo = github.get_repo("bsullivan-sd/DockerLearning")
