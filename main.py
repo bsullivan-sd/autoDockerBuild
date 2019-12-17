@@ -5,7 +5,7 @@ import json
 import subprocess
 
 github_token = os.environ['INPUT_GITHUB_TOKEN']
-dockerhub_repo = os.environ['INPUT_DOCKERHUB_REPO']
+#dockerhub_repo = os.environ['INPUT_DOCKERHUB_REPO']
 docker_username = os.environ['INPUT_DOCKER_USERNAME']
 docker_password = os.environ['INPUT_DOCKER_PASSWORD']
 
