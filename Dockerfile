@@ -1,3 +1,3 @@
 FROM docker
-RUN apk python3
+RUN apk -U add python3
 CMD python3 --version
