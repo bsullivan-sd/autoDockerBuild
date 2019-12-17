@@ -3,6 +3,8 @@ import os
 from github import Github
 import json
 
+github_token = os.environ['GITHUB_TOKEN']
+
 def return_dockerfile_locations(repos):
     results=[]
     contents = repos.get_contents("")
@@ -35,7 +37,7 @@ def build_docker(dockerfile_path):
     print(dockerfile)
 
 
-github = Github("0d461fcd9dde4a8580d4db2b6bf3efb891e9f934")
+github = Github(github_token)
 repo = github.get_repo("bsullivan-sd/DockerLearning")
 branch = repo.get_branch("master")
 #commit = repo.get_commit(branch.commit)
