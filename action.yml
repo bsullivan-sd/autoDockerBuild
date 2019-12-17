@@ -1,0 +1,20 @@
+  
+name: Build and publish Docker images that have file changes in their directories
+description: Build and publish Docker images based on changed paths
+author: bsullivan-sd
+branding:
+  icon: anchor
+  color: blue
+inputs:
+  GITHUB_TOKEN:
+    description: Github token
+    required: false
+  docker_username:
+    description: DockerHub username
+    required: false
+  docker_password:
+    description: DockerHub password
+    required: false
+runs:
+  using: docker
+  image: Dockerfile
