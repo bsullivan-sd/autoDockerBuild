@@ -1,5 +1,5 @@
 FROM docker
-RUN apk -U add python3
+RUN apk add --no-cache --update python3 python3-dev  gcc build-base
 COPY main.py /main.py
 COPY requirements.txt /requirements.txt
 RUN pip install -r requirements.txt
