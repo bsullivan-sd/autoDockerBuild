@@ -33,7 +33,7 @@ def return_dockerfile_locations(repos):
 def return_file_paths_that_have_changed_files(branch):
     results=[]
     files_changed = branch.commit.raw_data
-    print(files_changed)
+    #print(files_changed)
     if 'files' in files_changed:
         for current_file in files_changed['files']:
             current_filename = current_file['filename']
@@ -56,27 +56,29 @@ def build_docker(dockerfile_path):
     subprocess.call("docker push rws2154/learning:python", shell=True)
     subprocess.call("docker logout", shell=True)
 
+def main():
+    # Create github login to get changes, need to look into if using the ENV['GITHUB_EVENT_PATH'] is better
+    github = Github(github_token)
+    repo = github.get_repo(github_repo)
 
-# Create github login to get changes, need to look into if using the ENV['GITHUB_EVENT_PATH'] is better
-github = Github(github_token)
-repo = github.get_repo(github_repo)
+    branch = repo.get_branch("master")
+    #commit = repo.get_commit(branch.commit)
 
-branch = repo.get_branch("master")
-#commit = repo.get_commit(branch.commit)
+    # Called predefined functions to get list of dockerfile path locations
+    # and paths and subpaths to files that have changed
+    dockerfile_path_locations = return_dockerfile_locations(repo)
+    paths_that_have_file_changes = return_file_paths_that_have_changed_files(branch)
 
-# Called predefined functions to get list of dockerfile path locations
-# and paths and subpaths to files that have changed
-dockerfile_path_locations = return_dockerfile_locations(repo)
-paths_that_have_file_changes = return_file_paths_that_have_changed_files(branch)
+    # Debugging only, not used otherwise.
+    print("***********************")
+    print(dockerfile_path_locations)
+    print(paths_that_have_file_changes)
+    print("***********************")
 
-# Debugging only, not used otherwise.
-print("***********************")
-print(dockerfile_path_locations)
-print(paths_that_have_file_changes)
-print("***********************")
+    # Build the docker file in a path or subpath that has a file change.
+    for x in paths_that_have_file_changes:
+        if x in dockerfile_path_locations:
+            build_docker(x)
 
-# Build the docker file in a path or subpath that has a file change.
-for x in paths_that_have_file_changes:
-    if x in dockerfile_path_locations:
-        build_docker(x)
-
+if __name__ == "__main__":
+    main()
