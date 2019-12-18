@@ -8,7 +8,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Setup env
+      - name: Install setuptools
+        run: apt-get install -y python-setuptools
+      - name: PIP install requirements.txt
         run: pip3 install -r requirements.txt
       - name: Test
         env: 
