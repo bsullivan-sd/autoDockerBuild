@@ -7,4 +7,4 @@ class test_changes ():
 
 test = test_changes()
 
-main.return_file_paths_that_have_changed_files(test)
+print(main.return_file_paths_that_have_changed_files(test))
