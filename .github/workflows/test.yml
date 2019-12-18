@@ -9,9 +9,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install setuptools
-        run: sudo apt-get install -y python-setuptools
+        run: pip install setuptools
       - name: PIP install requirements.txt
-        run: pip3 install -r requirements.txt
+        run: pip install -r requirements.txt
       - name: Test
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
