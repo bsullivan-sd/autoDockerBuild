@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install setuptools
-        run: pip3 install setuptools
+        run: pip3 install setuptools wheel
       - name: PIP install requirements.txt
         run: pip3 install -r requirements.txt
       - name: Test
