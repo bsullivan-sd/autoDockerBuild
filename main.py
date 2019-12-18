@@ -10,6 +10,10 @@ github_token = os.environ['INPUT_GITHUB_TOKEN']
 docker_username = os.environ['INPUT_DOCKER_USERNAME']
 docker_password = os.environ['INPUT_DOCKER_PASSWORD']
 github_repo = os.environ['GITHUB_REPOSITORY']
+event_path = os.environ['GITHUB_EVENT_PATH']
+github_ref = os.environ['GITHUB_REF']
+
+print(github_ref)
 
 # Returns a list of directory paths that have Dockerfiles
 def return_dockerfile_locations(repos):
