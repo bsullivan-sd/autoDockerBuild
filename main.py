@@ -26,7 +26,7 @@ def return_dockerfile_locations(repos):
         else:
             #print(os.path.split(file_content.path)[1])
             if os.path.split(file_content.path)[1] == "Dockerfile":
-                results.append(os.path.split(file_content.path)[0])
+                results.append(str(os.path.split(file_content.path)[0]) + "/")
     return results
 
 # Returns a list of file paths and sub paths that have file changes.  Old could only pull last commit file changes, might use for on: push event
@@ -59,7 +59,7 @@ def return_file_paths_that_have_changed_files(pull_request):
             current_path_array=os.path.split(current_filename)[0].split('/')
             recursive_path = '/'
             for directory in current_path_array:
-                recursive_path=recursive_path + directory + '/'
+                recursive_path=recursive_path + directory + ''
                 if not recursive_path in results:
                     results.append(recursive_path)
     return results
