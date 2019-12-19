@@ -64,6 +64,14 @@ def main():
     branch = repo.get_branch("master")
     #commit = repo.get_commit(branch.commit)
 
+    # Just want to see what is in the event_path file
+    f = open(event_path,"r")
+    event_path_content = f.read()
+    f.close()
+    print("**************************************************************")
+    print(event_path_content)
+    print("**************************************************************")
+
     # Called predefined functions to get list of dockerfile path locations
     # and paths and subpaths to files that have changed
     dockerfile_path_locations = return_dockerfile_locations(repo)
