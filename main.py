@@ -30,15 +30,32 @@ def return_dockerfile_locations(repos):
     return results
 
 # Returns a list of file paths and sub paths that have file changes
-def return_file_paths_that_have_changed_files(branch):
+#def return_file_paths_that_have_changed_files(branch):
+#    results=[]
+#    files_changed = branch.commit.raw_data
+#    print(files_changed)
+#    if 'files' in files_changed:
+#        for current_file in files_changed['files']:
+#            current_filename = current_file['filename']
+#            #print("FILENAME:")
+#            #print(current_filename)
+#            current_path_array=os.path.split(current_filename)[0].split('/')
+#            recursive_path = '/'
+#            for directory in current_path_array:
+#                recursive_path=recursive_path + directory + '/'
+#                if not recursive_path in results:
+#                    results.append(recursive_path)
+#    return results
+
+# Returns a list of file paths and sub paths that have file changes
+def return_file_paths_that_have_changed_files(pull_request):
     results=[]
-    files_changed = branch.commit.raw_data
-    print(files_changed)
-    if 'files' in files_changed:
-        for current_file in files_changed['files']:
-            current_filename = current_file['filename']
-            #print("FILENAME:")
-            #print(current_filename)
+    files_changed = pull_request.get_files()
+    #print(files_changed)
+    for file_changed in files_changed:
+            current_filename = file_changed.filename
+            print("FILENAME:")
+            print(current_filename)
             current_path_array=os.path.split(current_filename)[0].split('/')
             recursive_path = '/'
             for directory in current_path_array:
@@ -76,7 +93,8 @@ def main():
     # Called predefined functions to get list of dockerfile path locations
     # and paths and subpaths to files that have changed
     dockerfile_path_locations = return_dockerfile_locations(repo)
-    paths_that_have_file_changes = return_file_paths_that_have_changed_files(branch)
+    #paths_that_have_file_changes = return_file_paths_that_have_changed_files(branch)
+    paths_that_have_file_changes = return_file_paths_that_have_changed_files(pull_request)
 
     # Debugging only, not used otherwise.
     print("***********************")
