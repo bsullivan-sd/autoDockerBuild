@@ -12,11 +12,12 @@ class pull_request_test():
         self.file1 = file_test("test1.txt")
         self.file2 = file_test("test2.txt")
 
-    def get_files():
-        return {self.file1,self.file2}
+    def get_files(self):
+        return {self.file1, self.file2}
 
-class file_test(filename):
-    def __init__(self):
+
+class file_test():
+    def __init__(self, filename):
         self.filename=filename
 
 
