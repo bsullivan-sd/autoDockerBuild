@@ -69,7 +69,7 @@ def build_docker(dockerfile_path):
     dockerfile = str(dockerfile_path) + "Dockerfile"
     if debug:
         print(dockerfile)
-    subprocess.call("docker login -u " + str(docker_username) + " -p " + str(docker_password), shell=True)
+    subprocess.call("echo " + str(docker_password) + " | docker login -u " + str(docker_username) + " --password-stdin", shell=True)
     subprocess.call("docker build -t rws2154/learning:python " + str(dockerfile_path), shell=True)
     subprocess.call("docker push rws2154/learning:python", shell=True)
     subprocess.call("docker logout", shell=True)
