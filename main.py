@@ -68,7 +68,7 @@ def main():
     with open(event_path) as json_file:
         event_path_data = json.load(json_file)
     
-    pull_request_number = event_path_content["pull_request"]["number"]
+    pull_request_number = event_path_data["pull_request"]["number"]
     print(pull_request_number)
     pull_request = repo.get_pull(pull_request_number)
 
