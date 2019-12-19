@@ -66,7 +66,7 @@ def return_file_paths_that_have_changed_files(pull_request):
 
 # Build the docker file at path that is passed in
 def build_docker(dockerfile_path):
-    dockerfile = str(dockerfile_path) + "/Dockerfile"
+    dockerfile = str(dockerfile_path) + "Dockerfile"
     print(dockerfile)
     subprocess.call("docker login -u " + str(docker_username) + " -p " + str(docker_password), shell=True)
     subprocess.call("docker build -t rws2154/learning:python " + str(dockerfile_path), shell=True)
