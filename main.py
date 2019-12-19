@@ -54,10 +54,10 @@ def return_file_paths_that_have_changed_files(pull_request):
     #print(files_changed)
     for file_changed in files_changed:
             current_filename = file_changed.filename
-            #print("FILENAME:")
-            #print(current_filename)
+            print("FILENAME:")
+            print(current_filename)
             current_path_array=os.path.split(current_filename)[0].split('/')
-            recursive_path = ''
+            recursive_path = '/'
             for directory in current_path_array:
                 recursive_path=recursive_path + directory + '/'
                 if not recursive_path in results:
@@ -94,10 +94,10 @@ def main():
     paths_that_have_file_changes = return_file_paths_that_have_changed_files(pull_request)
 
     # Debugging only, not used otherwise.
-    # print("***********************")
-    # print(dockerfile_path_locations)
-    # print(paths_that_have_file_changes)
-    # print("***********************")
+    print("***********************")
+    print(dockerfile_path_locations)
+    print(paths_that_have_file_changes)
+    print("***********************")
 
     # Build the docker file in a path or subpath that has a file change.
     for x in paths_that_have_file_changes:
