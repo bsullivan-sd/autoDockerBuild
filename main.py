@@ -29,7 +29,7 @@ def return_dockerfile_locations(repos):
                 results.append(os.path.split(file_content.path)[0])
     return results
 
-# Returns a list of file paths and sub paths that have file changes
+# Returns a list of file paths and sub paths that have file changes.  Old could only pull last commit file changes, might use for on: push event
 #def return_file_paths_that_have_changed_files(branch):
 #    results=[]
 #    files_changed = branch.commit.raw_data
@@ -54,8 +54,8 @@ def return_file_paths_that_have_changed_files(pull_request):
     #print(files_changed)
     for file_changed in files_changed:
             current_filename = file_changed.filename
-            print("FILENAME:")
-            print(current_filename)
+            #print("FILENAME:")
+            #print(current_filename)
             current_path_array=os.path.split(current_filename)[0].split('/')
             recursive_path = '/'
             for directory in current_path_array:
@@ -78,29 +78,26 @@ def main():
     github = Github(github_token)
     repo = github.get_repo(github_repo)
     
-    branch = repo.get_branch("master")
-    #commit = repo.get_commit(branch.commit)
-
-    # Just want to see what is in the event_path file
+    # Read in the event_path file and load to json object.  Use that to get the pull request number
     with open(event_path) as json_file:
         event_path_data = json.load(json_file)
     
     pull_request_number = event_path_data["pull_request"]["number"]
-    print(pull_request_number)
+    
+    # Using the pull request number, get a pull request object to pass to the paths_that_have_files_changes function
     pull_request = repo.get_pull(pull_request_number)
 
-    print(pull_request.get_files())
+    
     # Called predefined functions to get list of dockerfile path locations
     # and paths and subpaths to files that have changed
     dockerfile_path_locations = return_dockerfile_locations(repo)
-    #paths_that_have_file_changes = return_file_paths_that_have_changed_files(branch)
     paths_that_have_file_changes = return_file_paths_that_have_changed_files(pull_request)
 
     # Debugging only, not used otherwise.
-    print("***********************")
-    print(dockerfile_path_locations)
-    print(paths_that_have_file_changes)
-    print("***********************")
+    # print("***********************")
+    # print(dockerfile_path_locations)
+    # print(paths_that_have_file_changes)
+    # print("***********************")
 
     # Build the docker file in a path or subpath that has a file change.
     for x in paths_that_have_file_changes:

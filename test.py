@@ -7,7 +7,19 @@ class test_raw_data ():
 class test_changes ():
     commit = test_raw_data()
 
+class pull_request_test():
+    def __init__(self):
+        self.file1 = file_test("test1.txt")
+        self.file2 = file_test("test2.txt")
 
-test = test_changes()
+    def get_files():
+        return {self.file1,self.file2}
 
-print(main.return_file_paths_that_have_changed_files(test))
+class file_test(filename):
+    def __init__(self):
+        self.filename=filename
+
+
+pull_request_test = pull_request_test()
+
+print(main.return_file_paths_that_have_changed_files(pull_request_test))
