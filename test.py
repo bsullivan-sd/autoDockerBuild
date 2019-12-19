@@ -9,8 +9,8 @@ class test_changes ():
 
 class pull_request_test():
     def __init__(self):
-        self.file1 = file_test("test1.txt")
-        self.file2 = file_test("test2.txt")
+        self.file1 = file_test("/test1/test1.txt")
+        self.file2 = file_test("/test2/test2.txt")
 
     def get_files(self):
         return {self.file1, self.file2}
@@ -18,7 +18,7 @@ class pull_request_test():
 
 class file_test():
     def __init__(self, filename):
-        self.filename=filename
+        self.filename = filename
 
 
 pull_request_test = pull_request_test()
