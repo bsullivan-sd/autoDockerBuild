@@ -1,5 +1,4 @@
-FROM docker
-RUN apk add --no-cache --update python3 python3-dev  gcc build-base
+FROM rws2154/auto_docker_build
 COPY main.py /main.py
 COPY requirements.txt /requirements.txt
 RUN pip3 install -r requirements.txt
