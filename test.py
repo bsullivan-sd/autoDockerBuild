@@ -25,7 +25,7 @@ class file_test():
 class TestPullRequest(unittest.TestCase):
 
     def test_pr(self):
-        self.assertEqual(main.return_file_paths_that_have_changed_files(pull_request_test()), ['test1/', 'test2'])
+        self.assertEqual(main.return_file_paths_that_have_changed_files(pull_request_test()), ['test1/', 'test2/'])
 
 
 if __name__ == '__main__':
