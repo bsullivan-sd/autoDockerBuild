@@ -33,7 +33,7 @@ def return_dockerfile_locations(repos):
 def return_file_paths_that_have_changed_files(branch):
     results=[]
     files_changed = branch.commit.raw_data
-    #print(files_changed)
+    print(files_changed)
     if 'files' in files_changed:
         for current_file in files_changed['files']:
             current_filename = current_file['filename']
