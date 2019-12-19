@@ -60,7 +60,7 @@ def main():
     # Create github login to get changes, need to look into if using the ENV['GITHUB_EVENT_PATH'] is better
     github = Github(github_token)
     repo = github.get_repo(github_repo)
-
+    
     branch = repo.get_branch("master")
     #commit = repo.get_commit(branch.commit)
 
@@ -71,7 +71,9 @@ def main():
     print("**************************************************************")
     print(event_path_content)
     print("**************************************************************")
+    pull_request = repo.get_pull(event_path_content["pull_request"]["number"])
 
+    print(pull_request)
     # Called predefined functions to get list of dockerfile path locations
     # and paths and subpaths to files that have changed
     dockerfile_path_locations = return_dockerfile_locations(repo)
