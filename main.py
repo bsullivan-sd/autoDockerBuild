@@ -12,8 +12,7 @@ docker_password = os.environ['INPUT_DOCKER_PASSWORD']
 github_repo = os.environ['GITHUB_REPOSITORY']
 event_path = os.environ['GITHUB_EVENT_PATH']
 github_ref = os.environ['GITHUB_REF']
-
-print(github_ref)
+debug = False
 
 # Returns a list of directory paths that have Dockerfiles
 def return_dockerfile_locations(repos):
@@ -54,8 +53,9 @@ def return_file_paths_that_have_changed_files(pull_request):
     #print(files_changed)
     for file_changed in files_changed:
             current_filename = file_changed.filename
-            print("FILENAME:")
-            print(current_filename)
+            if debug:
+                print("FILENAME:")
+                print(current_filename)
             current_path_array=os.path.split(current_filename)[0].split('/')
             recursive_path = ''
             for directory in current_path_array:
@@ -67,7 +67,8 @@ def return_file_paths_that_have_changed_files(pull_request):
 # Build the docker file at path that is passed in
 def build_docker(dockerfile_path):
     dockerfile = str(dockerfile_path) + "Dockerfile"
-    print(dockerfile)
+    if debug:
+        print(dockerfile)
     subprocess.call("docker login -u " + str(docker_username) + " -p " + str(docker_password), shell=True)
     subprocess.call("docker build -t rws2154/learning:python " + str(dockerfile_path), shell=True)
     subprocess.call("docker push rws2154/learning:python", shell=True)
@@ -94,10 +95,11 @@ def main():
     paths_that_have_file_changes = return_file_paths_that_have_changed_files(pull_request)
 
     # Debugging only, not used otherwise.
-    print("***********************")
-    print(dockerfile_path_locations)
-    print(paths_that_have_file_changes)
-    print("***********************")
+    if debug:
+        print("***********************")
+        print(dockerfile_path_locations)
+        print(paths_that_have_file_changes)
+        print("***********************")
 
     # Build the docker file in a path or subpath that has a file change.
     for x in paths_that_have_file_changes:
