@@ -71,7 +71,10 @@ def main():
     print("**************************************************************")
     print(event_path_content)
     print("**************************************************************")
-    pull_request = repo.get_pull(event_path_content["pull_request"]["number"])
+
+    pull_request_number = json.loads(event_path_content)["pull_request"]["number"]
+    print(pull_request_number)
+    pull_request = repo.get_pull(pull_request_number)
 
     print(pull_request)
     # Called predefined functions to get list of dockerfile path locations
