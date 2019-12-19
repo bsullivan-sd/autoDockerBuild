@@ -5,13 +5,13 @@ import json
 import subprocess
 
 # Import from enviroment variables.
-github_token = os.environ['INPUT_GITHUB_TOKEN']
+github_token = os.environ.get('INPUT_GITHUB_TOKEN')
 #dockerhub_repo = os.environ['INPUT_DOCKERHUB_REPO']
-docker_username = os.environ['INPUT_DOCKER_USERNAME']
-docker_password = os.environ['INPUT_DOCKER_PASSWORD']
-github_repo = os.environ['GITHUB_REPOSITORY']
-event_path = os.environ['GITHUB_EVENT_PATH']
-github_ref = os.environ['GITHUB_REF']
+docker_username = os.environ.get('INPUT_DOCKER_USERNAME')
+docker_password = os.environ.get('INPUT_DOCKER_PASSWORD')
+github_repo = os.environ.get('GITHUB_REPOSITORY')
+event_path = os.environ.get('GITHUB_EVENT_PATH')
+
 debug = False
 
 # Returns a list of directory paths that have Dockerfiles
