@@ -22,7 +22,7 @@ class file_test():
         self.filename = filename
 
 
-class test_all(unittest.TestCase):
+class TestPullRequest(unittest.TestCase):
 
     def pr_test(self):
         self.assertEqual(main.return_file_paths_that_have_changed_files(pull_request_test()), ['test1/', 'test2/'])
