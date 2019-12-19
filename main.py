@@ -57,7 +57,7 @@ def return_file_paths_that_have_changed_files(pull_request):
             #print("FILENAME:")
             #print(current_filename)
             current_path_array=os.path.split(current_filename)[0].split('/')
-            recursive_path = '/'
+            recursive_path = ''
             for directory in current_path_array:
                 recursive_path=recursive_path + directory + '/'
                 if not recursive_path in results:
